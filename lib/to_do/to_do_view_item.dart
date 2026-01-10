@@ -65,13 +65,15 @@ class _TodoViewitemState extends State<TodoViewitem> {
               ),
             ),
           ),
+          widget.isFavorite
+              ? Icon(Icons.star, size: 24, color: Colors.black)
+              : Icon(Icons.star_border, size: 24, color: Colors.black),
+
           IconButton(
             onPressed: () {
-              widget.onFavorite(widget.index, !widget.isFavorite);
+              //
             },
-            icon: widget.isFavorite
-                ? Icon(Icons.star, size: 24, color: Colors.black)
-                : Icon(Icons.star_border, size: 24, color: Colors.black),
+            icon: Icon(Icons.delete, size: 24, color: Colors.black),
           ),
         ],
       ),

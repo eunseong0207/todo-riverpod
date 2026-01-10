@@ -3,6 +3,7 @@ import 'package:tasks/to_do/todo_view.dart';
 import 'package:tasks/to_do/to_do_empty.dart';
 import 'package:tasks/to_do/to_do_entity.dart';
 import 'package:tasks/to_do/to_do_keyboard_other.dart';
+import 'package:tasks/to_do/weather_bottom.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -20,7 +21,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  String name = "은성`s Tasks";
+  String name = "스파르타`s Tasks";
 
   @override
   Widget build(BuildContext context) {
@@ -49,9 +50,12 @@ class _HomePageState extends State<HomePage> {
         ),
         child: Icon(Icons.add, color: Colors.white),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
       // ----- 빨간배경 + 버튼 종료 -----
       resizeToAvoidBottomInset: false,
+      bottomNavigationBar: WeatherBottom(),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           todoList.isNotEmpty
               ? TodoView(
