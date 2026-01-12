@@ -2,7 +2,8 @@
 import 'package:flutter/material.dart';
 
 class ToDoEntity extends StatelessWidget {
-  ToDoEntity({super.key, 
+  ToDoEntity({
+    super.key,
     required this.title,
     required this.description,
     required this.isFavorite,

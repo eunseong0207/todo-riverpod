@@ -40,6 +40,8 @@ class KeyboardState extends State<Keyboard> {
     textcontroller.dispose();
   }
 
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -54,62 +56,74 @@ class KeyboardState extends State<Keyboard> {
           right: 10,
           bottom: MediaQuery.of(context).viewInsets.bottom + 15,
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              controller: textcontroller,
-              autofocus: true,
-              style: TextStyle(fontSize: 16),
-              decoration: InputDecoration(
-                hintText: '새 할일',
-                border: InputBorder.none,
-              ),
-              textInputAction: TextInputAction.done,
-              onSubmitted: (value) {},
-            ),
-            if (showdesc)
-              TextField(
-                controller: descriptioncontorller,
-                minLines: 1,
-                maxLines: 3,
-                textInputAction: TextInputAction.newline,
+        child: Form(
+          key: formKey,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextFormField(
+                controller: textcontroller,
+                autofocus: true,
+                style: TextStyle(fontSize: 16),
                 decoration: InputDecoration(
-                  hintText: "세부정보 추가",
+                  hintText: '새 할일',
                   border: InputBorder.none,
                 ),
+                textInputAction: TextInputAction.done,
+                validator: (value) {
+                  if (value?.trim().isEmpty ?? true) {
+                    return '할 일을 입력해주세요';
+                  }
+                  return null;
+                },
               ),
-            Row(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    showdesc = !showdesc;
-                    setState(() {});
+              if (showdesc)
+                TextFormField(
+                  controller: descriptioncontorller,
+                  minLines: 1,
+                  maxLines: 3,
+                  textInputAction: TextInputAction.newline,
+                  decoration: InputDecoration(
+                    hintText: "세부 정보는 여기에 작성해 봅니다.",
+                    border: InputBorder.none,
+                  ),
+                  validator: (value) {
+                    if (value?.trim().isEmpty ?? true) {
+                      return '세부 내용을 입력해주세요';
+                    }
+                    return null;
                   },
-                  child: Icon(Icons.short_text_rounded, size: 24),
                 ),
-                IconButton(
-                  onPressed: () {
-                    setState(() {
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      showdesc = !showdesc;
                       onTogglFavorite = !onTogglFavorite;
-                    });
-                  },
-                  icon: onTogglFavorite
-                      ? Icon(Icons.star, size: 24, color: Colors.black)
-                      : Icon(Icons.star_border, size: 24, color: Colors.black),
-                ),
-                Spacer(),
-                GestureDetector(
-                  onTap: () {
-                    saveTodo();
-                  },
+                      setState(() {});
+                    },
+                    icon: onTogglFavorite
+                        ? Icon(Icons.star, size: 24, color: Colors.black)
+                        : Icon(
+                            Icons.star_border,
+                            size: 24,
+                            color: Colors.black,
+                          ),
+                  ),
 
-                  child: Text("저장"),
-                ),
-                SizedBox(width: 10),
-              ],
-            ),
-          ],
+                  Spacer(),
+                  GestureDetector(
+                    onTap: () {
+                      saveTodo();
+                      final result = formKey.currentState?.validate();
+                    },
+                    child: Text("저장"),
+                  ),
+                  SizedBox(width: 10),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

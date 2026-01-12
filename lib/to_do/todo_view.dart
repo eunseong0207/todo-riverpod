@@ -31,8 +31,11 @@ class TodoViewState extends State<TodoView> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                      TodoDetailPage(realtodo: widget.toList, index: index,onTogglFavorite: widget.onTogglFavorite),
+                  builder: (context) => TodoDetailPage(
+                    realtodo: widget.toList,
+                    index: index,
+                    onTogglFavorite: widget.onTogglFavorite,
+                  ),
                 ),
               );
             },
