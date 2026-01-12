@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "435078107064",
+    "project_id": "flutter-blog-app-3e996",
+    "storage_bucket": "flutter-blog-app-3e996.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:435078107064:android:08dce38995b36de5c5094d",
+        "android_client_info": {
+          "package_name": "com.example.flutter_firebase_blog_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBD3Eo-eVNiCvypOGp3-4y2LZH0Npf1S_M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:435078107064:android:6f1804e8df8dda85c5094d",
+        "android_client_info": {
+          "package_name": "com.example.tasks"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBD3Eo-eVNiCvypOGp3-4y2LZH0Npf1S_M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
