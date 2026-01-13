@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tasks/home/home_view_model.dart';
 import 'package:tasks/to_do/to_do_entity.dart';
 
-class Keyboard extends StatefulWidget {
+class Keyboard extends ConsumerStatefulWidget {
   const Keyboard({super.key, required this.onCreate});
 
   final void Function(ToDoEntity) onCreate;
 
   @override
-  State<Keyboard> createState() => KeyboardState();
+  ConsumerState<Keyboard> createState() => KeyboardState();
 }
 
-class KeyboardState extends State<Keyboard> {
+class KeyboardState extends ConsumerState<Keyboard> {
   bool showdesc = false;
   bool onTogglFavorite = false;
 
@@ -18,17 +20,19 @@ class KeyboardState extends State<Keyboard> {
   TextEditingController descriptioncontorller = TextEditingController();
 
   void saveTodo() {
-    //
+    print('rrrrr');
+    final vm = ref.read(homeViewModelProvider.notifier);
     if (textcontroller.text.isEmpty) {
       return;
     }
-
-    widget.onCreate(
-      ToDoEntity(
+    print('dwdwd');
+    vm.addTodo(
+      todo: ToDoEntity(
         title: textcontroller.text,
         description: descriptioncontorller.text,
         isFavorite: onTogglFavorite,
         isDone: false,
+        id: "",
       ),
     );
     Navigator.of(context).pop();

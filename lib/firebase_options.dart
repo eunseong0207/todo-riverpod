@@ -50,19 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBD3Eo-eVNiCvypOGp3-4y2LZH0Npf1S_M',
-    appId: '1:435078107064:android:6f1804e8df8dda85c5094d',
-    messagingSenderId: '435078107064',
-    projectId: 'flutter-blog-app-3e996',
-    storageBucket: 'flutter-blog-app-3e996.firebasestorage.app',
+    apiKey: 'AIzaSyD0yriNm_30HywHSs_Xqh-TJjfMlBNGS8k',
+    appId: '1:251640941991:android:13f2af4f93aab81f38ba82',
+    messagingSenderId: '251640941991',
+    projectId: 'todoapp-ad3de',
+    storageBucket: 'todoapp-ad3de.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDAk-qKHty4XlBc_sLM8kw96T_xmH0muaA',
-    appId: '1:435078107064:ios:8f5acdd15b4efec7c5094d',
-    messagingSenderId: '435078107064',
-    projectId: 'flutter-blog-app-3e996',
-    storageBucket: 'flutter-blog-app-3e996.firebasestorage.app',
+    apiKey: 'AIzaSyDHl93XZIVKd46k6EY7M0kYyn_lpzgaG1Q',
+    appId: '1:251640941991:ios:95d2a51ed96022a138ba82',
+    messagingSenderId: '251640941991',
+    projectId: 'todoapp-ad3de',
+    storageBucket: 'todoapp-ad3de.firebasestorage.app',
     iosBundleId: 'com.example.tasks',
   );
+
 }

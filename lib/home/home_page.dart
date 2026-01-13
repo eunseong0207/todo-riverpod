@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:tasks/to_do/todo_view.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tasks/home/home_view_model.dart';
+import 'package:tasks/view/todo_view.dart';
 import 'package:tasks/to_do/to_do_empty.dart';
 import 'package:tasks/to_do/to_do_entity.dart';
 import 'package:tasks/to_do/to_do_keyboard_other.dart';
 import 'package:tasks/to_do/weather_bottom.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  ConsumerState<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends ConsumerState<HomePage> {
   List<ToDoEntity> todoList = [];
 
   void onCreate(ToDoEntity newtodo) {
@@ -25,6 +27,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    homeViewModelProvider;
+
+    final todos = ref.watch(homeViewModelProvider);
     return Scaffold(
       backgroundColor: Colors.grey[400],
       appBar: AppBar(
@@ -57,7 +62,7 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          todoList.isNotEmpty
+          todos.isNotEmpty
               ? TodoView(
                   toList: todoList,
                   onToggleDone: (int index, bool value) {
