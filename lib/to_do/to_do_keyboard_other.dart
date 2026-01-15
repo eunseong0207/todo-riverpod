@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tasks/home/home_view_model.dart';
-import 'package:tasks/to_do/to_do_entity.dart';
 
 class Keyboard extends ConsumerStatefulWidget {
-  const Keyboard({super.key, required this.onCreate});
-
-  final void Function(ToDoEntity) onCreate;
+  const Keyboard({super.key});
 
   @override
   ConsumerState<Keyboard> createState() => KeyboardState();
@@ -20,20 +17,15 @@ class KeyboardState extends ConsumerState<Keyboard> {
   TextEditingController descriptioncontorller = TextEditingController();
 
   void saveTodo() {
-    print('rrrrr');
     final vm = ref.read(homeViewModelProvider.notifier);
     if (textcontroller.text.isEmpty) {
       return;
     }
-    print('dwdwd');
     vm.addTodo(
-      todo: ToDoEntity(
-        title: textcontroller.text,
-        description: descriptioncontorller.text,
-        isFavorite: onTogglFavorite,
-        isDone: false,
-        id: "",
-      ),
+      title: textcontroller.text,
+      description: descriptioncontorller.text,
+      isFavorite: onTogglFavorite,
+ 
     );
     Navigator.of(context).pop();
   }

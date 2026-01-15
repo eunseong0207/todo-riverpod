@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tasks/home/home_view_model.dart';
 import 'package:tasks/view/todo_view.dart';
 import 'package:tasks/to_do/to_do_empty.dart';
-import 'package:tasks/to_do/to_do_entity.dart';
 import 'package:tasks/to_do/to_do_keyboard_other.dart';
 import 'package:tasks/to_do/weather_bottom.dart';
 
@@ -15,13 +14,6 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomePage> {
-  List<ToDoEntity> todoList = [];
-
-  void onCreate(ToDoEntity newtodo) {
-    setState(() {
-      todoList.add(newtodo);
-    });
-  }
 
   String name = "스파르타`s Tasks";
 
@@ -45,7 +37,7 @@ class _HomePageState extends ConsumerState<HomePage> {
           showModalBottomSheet(
             context: context,
             builder: (context) {
-              return SingleChildScrollView(child: Keyboard(onCreate: onCreate));
+              return SingleChildScrollView(child: Keyboard());
             },
           );
         },
@@ -64,17 +56,6 @@ class _HomePageState extends ConsumerState<HomePage> {
         children: [
           todos.isNotEmpty
               ? TodoView(
-                  toList: todoList,
-                  onToggleDone: (int index, bool value) {
-                    setState(() {
-                      todoList[index].isDone = value;
-                    });
-                  },
-                  onTogglFavorite: (int index, bool value) {
-                    setState(() {
-                      todoList[index].isFavorite = value;
-                    });
-                  },
                 )
               : Empty(name: name),
         ],

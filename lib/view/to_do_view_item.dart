@@ -1,31 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tasks/home/home_view_model.dart';
 
-class TodoViewitem extends StatefulWidget {
-  TodoViewitem({
-    super.key,
-    required this.content,
-    required this.isDone,
-    required this.onDone,
-    required this.index,
-    required this.isFavorite,
-    required this.onFavorite,
-  });
+class TodoViewitem extends ConsumerWidget {
+  TodoViewitem({super.key, required this.id});
 
-  final int index;
-  String content;
-  bool isDone;
-  bool isFavorite;
-
-  final void Function(int index, bool value) onDone;
-  final void Function(int index, bool value) onFavorite;
+  final String id;
 
   @override
-  State<TodoViewitem> createState() => _TodoViewitemState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(homeViewModelProvider);
+    final todo = state.firstWhere((todo) => todo.id == id);
+    final vm = ref.read(homeViewModelProvider.notifier);
 
-class _TodoViewitemState extends State<TodoViewitem> {
-  @override
-  Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16),
       margin: EdgeInsets.symmetric(vertical: 8),
@@ -39,7 +26,7 @@ class _TodoViewitemState extends State<TodoViewitem> {
           SizedBox(width: 12),
           GestureDetector(
             onTap: () {
-              widget.onDone(widget.index, !widget.isDone);
+              // vm(id: id);
             },
             child: Container(
               width: 24,
@@ -47,9 +34,9 @@ class _TodoViewitemState extends State<TodoViewitem> {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(color: Colors.black12),
-                color: widget.isDone ? Colors.black : null,
+                color: todo.isDone ? Colors.green : null,
               ),
-              child: widget.isDone
+              child: todo.isDone
                   ? Icon(Icons.check, color: Colors.white, size: 19)
                   : null,
             ),
@@ -58,22 +45,23 @@ class _TodoViewitemState extends State<TodoViewitem> {
           //
           Expanded(
             child: Text(
-              widget.content,
+              todo.title,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                decoration: widget.isDone ? TextDecoration.lineThrough : null,
-                //
+                decoration: todo.isDone ? TextDecoration.lineThrough : null,
               ),
             ),
           ),
-          widget.isFavorite
+
+          todo.isFavorite
               ? Icon(Icons.star, size: 24, color: Colors.black)
               : Icon(Icons.star_border, size: 24, color: Colors.black),
-
           IconButton(
             onPressed: () {
-              //
+              vm.deleteTodo(id: id);
             },
             icon: Icon(Icons.delete, size: 24, color: Colors.black),
+            //add todo
           ),
         ],
       ),
